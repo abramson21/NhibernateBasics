@@ -1,6 +1,10 @@
 ﻿using NhibernateBasics.Model;
+
 using System;
 using System.Linq;
+#if DEBUG
+using System.Runtime.InteropServices;
+#endif
 using System.Windows.Forms;
 
 namespace NhibernateBasics
@@ -9,7 +13,7 @@ namespace NhibernateBasics
     {
         public Form1()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -19,15 +23,18 @@ namespace NhibernateBasics
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            loadEmployeeData();
+#if DEBUG
+            AllocConsole();
+#endif
+            this.LoadEmployeeData();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            loadEmployeeData();
+            this.LoadEmployeeData();
         }
 
-        private void loadEmployeeData()
+        private void LoadEmployeeData()
         {
             try
             {
@@ -41,5 +48,11 @@ namespace NhibernateBasics
                 throw ex;
             }
         }
+
+#if DEBUG
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
+#endif
     }
 }
