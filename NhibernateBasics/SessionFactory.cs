@@ -1,68 +1,72 @@
-﻿using NHibernate;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Configuration;
+﻿using System.Configuration;
+using System.Reflection;
+
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Automapping;
 
+using NHibernate;
+using NHibernate.Tool.hbm2ddl;
+
 namespace NhibernateBasics
 {
-    public class SessionFactory
+    public static class SessionFactory
     {
-        private static volatile ISessionFactory iSessionFactory;
-        private static object syncRoot = new Object();
+        private static volatile ISessionFactory sessionFactory;
+
+        private static readonly object syncRoot = new object();
 
         public static ISession OpenSession
         {
             get
             {
-                if (iSessionFactory == null)
+                if (sessionFactory == null)
                 {
                     lock (syncRoot)
                     {
-                        if (iSessionFactory == null)
+                        if (sessionFactory == null)
                         {
-                            iSessionFactory = BuilSessionFactory();
+                            sessionFactory = BuilSessionFactory();
                         }
                     }
                 }
-                return iSessionFactory.OpenSession();
+
+                return sessionFactory.OpenSession();
             }
         }
+
+        private static Assembly TargetAssembly => Assembly.GetExecutingAssembly();
 
         private static ISessionFactory BuilSessionFactory()
         {
-            try
-            {
-                string connectionString = System.Configuration.ConfigurationManager.AppSettings["connection_string"];
+            var connectionString = ConfigurationManager.AppSettings["connection_string"];
 
-                return Fluently.Configure()
-                    .Database(MsSqlConfiguration.MsSql2012
-                    .ConnectionString(connectionString))
-                    .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Program>())
-                    .ExposeConfiguration(BuildSchema)
-                    .BuildSessionFactory();
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-                throw ex;
-            }
+            var configuration = MsSqlConfiguration.MsSql2012
+                    .ConnectionString(connectionString)
+                    .ShowSql()
+                    .FormatSql();
+
+            return Fluently.Configure()
+                .Database(configuration)
+                .Mappings(m =>
+                {
+                    m.FluentMappings.AddFromAssembly(TargetAssembly);
+                    m.AutoMappings.Add(CreateAutoMappings);
+                })
+                .ExposeConfiguration(BuildSchema)
+                .BuildSessionFactory();
         }
 
-        //Create Session
-        private static AutoPersistenceModel CreateMappings()
+        private static AutoPersistenceModel CreateAutoMappings()
         {
             return AutoMap
-                .Assembly(System.Reflection.Assembly.GetExecutingAssembly())
-                .Where(testc => testc.Namespace == "NhibernateBasics.Model");
+                .Assembly(TargetAssembly)
+                .Where(x => x.Namespace == "NhibernateBasics.Model");
         }
 
-        private static void BuildSchema(NHibernate.Cfg.Configuration config)
+        private static void BuildSchema(NHibernate.Cfg.Configuration configuration)
         {
-
+            new SchemaExport(configuration).Execute(true, true, true);
         }
     }
 }
