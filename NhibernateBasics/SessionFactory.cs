@@ -11,6 +11,7 @@ namespace NhibernateBasics
 {
     public class SessionFactory
     {
+
         private static volatile ISessionFactory iSessionFactory;
         private static object syncRoot = new Object();
 
