@@ -1,12 +1,10 @@
-﻿using NHibernate;
+﻿using NhibernateBasics.Model;
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+#if DEBUG
+using System.Runtime.InteropServices;
+#endif
 using System.Windows.Forms;
 
 namespace NhibernateBasics
@@ -15,7 +13,7 @@ namespace NhibernateBasics
     {
         public Form1()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -25,24 +23,36 @@ namespace NhibernateBasics
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            loadEmployeeData();
+#if DEBUG
+            AllocConsole();
+#endif
+            this.LoadEmployeeData();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            loadEmployeeData();
+            this.LoadEmployeeData();
         }
 
-        private void loadEmployeeData()
+        private void LoadEmployeeData()
         {
-            ISession session = SessionFactory.OpenSession;
-            
-            using (session)
+            try
             {
-                IQuery query = session.CreateQuery("FROM Employee");
-                IList<Model.Employee> empInfo = query.List<Model.Employee>();
-                dataGridView1.DataSource = empInfo;
+                using var session = SessionFactory.OpenSession;
+                this.dataGridView1.DataSource = session.Query<Employee>().ToList();
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message + Environment.NewLine + ex.StackTrace;
+                MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw ex;
             }
         }
+
+#if DEBUG
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
+#endif
     }
 }
