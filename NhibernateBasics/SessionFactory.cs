@@ -17,15 +17,9 @@ namespace NhibernateBasics
     /// </summary>
     public static class SessionFactory
     {
-<<<<<<< HEAD
-
-        private static volatile ISessionFactory iSessionFactory;
-        private static object syncRoot = new Object();
-=======
         private static volatile ISessionFactory sessionFactory;
 
         private static readonly object syncRoot = new object();
->>>>>>> master
 
         public static ISession OpenSession
         {
@@ -60,7 +54,7 @@ namespace NhibernateBasics
             return Fluently.Configure()
                 .Database(configuration)
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Employee>())
-                .ExposeConfiguration(BuildSchema)
+                //.ExposeConfiguration(BuildSchema)
                 .BuildSessionFactory();
         }
 
