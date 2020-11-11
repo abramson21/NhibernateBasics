@@ -1,26 +1,21 @@
 ﻿using FluentNHibernate.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using NhibernateBasics.Model;
 
 namespace NhibernateBasics.Mappings
 {
     /// <summary>
-    /// 
+    /// Правила отображения <see cref="Employee"/> на таблицу в БД.
     /// </summary>
-    public class EmployeeMapping : ClassMap<Model.Employee>
+    public class EmployeeMapping : ClassMap<Employee>
     {
         public EmployeeMapping()
         {
+            this.Table("Employee");
             this.Id(x => x.Id);
-            //????
+
             this.Map(x => x.FirstName).Not.Nullable();
             this.Map(x => x.LastName).Not.Nullable();
             this.Map(x => x.Email).Not.Nullable();
-
-            Table("Employee");
-
         }
     }
 }

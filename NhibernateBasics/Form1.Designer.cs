@@ -33,13 +33,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Email = new System.Windows.Forms.TextBox();
+            this.LastName = new System.Windows.Forms.TextBox();
+            this.FirstName = new System.Windows.Forms.TextBox();
+            this.IdTxt = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.Insert = new System.Windows.Forms.Button();
+            this.Update = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -55,10 +55,10 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.Email);
+            this.groupBox1.Controls.Add(this.LastName);
+            this.groupBox1.Controls.Add(this.FirstName);
+            this.groupBox1.Controls.Add(this.IdTxt);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(635, 185);
@@ -102,42 +102,42 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "ID";
             // 
-            // textBox4
+            // Email
             // 
-            this.textBox4.Location = new System.Drawing.Point(142, 133);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(468, 27);
-            this.textBox4.TabIndex = 1;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.Email.Location = new System.Drawing.Point(142, 133);
+            this.Email.Name = "Email";
+            this.Email.Size = new System.Drawing.Size(468, 27);
+            this.Email.TabIndex = 1;
+            this.Email.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox3
+            // LastName
             // 
-            this.textBox3.Location = new System.Drawing.Point(142, 100);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(468, 27);
-            this.textBox3.TabIndex = 1;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.LastName.Location = new System.Drawing.Point(142, 100);
+            this.LastName.Name = "LastName";
+            this.LastName.Size = new System.Drawing.Size(468, 27);
+            this.LastName.TabIndex = 1;
+            this.LastName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox2
+            // FirstName
             // 
-            this.textBox2.Location = new System.Drawing.Point(143, 59);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(467, 27);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.FirstName.Location = new System.Drawing.Point(143, 59);
+            this.FirstName.Name = "FirstName";
+            this.FirstName.Size = new System.Drawing.Size(467, 27);
+            this.FirstName.TabIndex = 1;
+            this.FirstName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox1
+            // IdTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(143, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(467, 27);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.IdTxt.Location = new System.Drawing.Point(143, 26);
+            this.IdTxt.Name = "IdTxt";
+            this.IdTxt.Size = new System.Drawing.Size(467, 27);
+            this.IdTxt.TabIndex = 1;
+            this.IdTxt.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.Insert);
+            this.groupBox2.Controls.Add(this.Update);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Location = new System.Drawing.Point(12, 218);
             this.groupBox2.Name = "groupBox2";
@@ -146,23 +146,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Control";
             // 
-            // button2
+            // Insert
             // 
-            this.button2.Location = new System.Drawing.Point(174, 40);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 29);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.Insert.BackColor = System.Drawing.SystemColors.Control;
+            this.Insert.Location = new System.Drawing.Point(174, 40);
+            this.Insert.Name = "Insert";
+            this.Insert.Size = new System.Drawing.Size(94, 29);
+            this.Insert.TabIndex = 0;
+            this.Insert.Text = "Insert";
+            this.Insert.UseVisualStyleBackColor = false;
+            this.Insert.Click += new System.EventHandler(this.Insert_Click);
             // 
-            // button3
+            // Update
             // 
-            this.button3.Location = new System.Drawing.Point(337, 40);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 29);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.Update.Location = new System.Drawing.Point(337, 40);
+            this.Update.Name = "Update";
+            this.Update.Size = new System.Drawing.Size(94, 29);
+            this.Update.TabIndex = 0;
+            this.Update.Text = "Update";
+            this.Update.UseVisualStyleBackColor = true;
+            this.Update.Click += new System.EventHandler(this.Update_Click);
             // 
             // button1
             // 
@@ -187,12 +190,13 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 26);
+            this.dataGridView1.Location = new System.Drawing.Point(5, 26);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(616, 311);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.Text = "dataGridView1";
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Form1
             // 
@@ -221,16 +225,16 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox IdTxt;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox Email;
+        private System.Windows.Forms.TextBox LastName;
+        private System.Windows.Forms.TextBox FirstName;
+        private System.Windows.Forms.Button Insert;
+        private System.Windows.Forms.Button Update;
     }
 }
 
